@@ -60,14 +60,21 @@ public class DataInitializer implements CommandLineRunner {
     private final ProductRepository productRepository;
 
     private void createCategories() {
+        List<Category> categories = new ArrayList<>();
+
         for (String categoryName : CATEGORY_NAMES)
-            categoryRepository.save(Category.builder().categoryName(categoryName).build());
+            categories.add(Category.builder().categoryName(categoryName).build());
+
+        categoryRepository.saveAll(categories);
     }
 
     private void createBrands() {
+        List<Brand> brands = new ArrayList<>();
+
         for (String brandName : BRAND_NAMES)
             brandRepository.save(Brand.builder().brandName(brandName).build());
-        brandRepository.flush();
+
+        brandRepository.saveAll(brands);
     }
 
     private void createProducts() {
