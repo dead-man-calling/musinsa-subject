@@ -35,7 +35,7 @@ public class PriceController {
     }
 
     @Operation(
-            summary = "카테고리 별 상품 최저가 총액 최저 브랜드 조회",
+            summary = "카테고리 별 상품 총액 최저가 브랜드 조회",
             description = "단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을 조회하는 API"
     )
     @GetMapping("/lowest-total-price-brand")
