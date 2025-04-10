@@ -1,6 +1,7 @@
 package com.musinsa.subject.service.core
 
 import com.musinsa.subject.entity.Brand
+import com.musinsa.subject.exception.DomainException
 import com.musinsa.subject.model.brand.BrandRequest
 import com.musinsa.subject.repository.BrandRepository
 import spock.lang.Specification
@@ -41,7 +42,7 @@ class BrandServiceSpec extends Specification {
         brandService.getBrand(brandId)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "브랜드 생성 - 유효한 요청으로 브랜드를 생성한다"() {
@@ -119,7 +120,7 @@ class BrandServiceSpec extends Specification {
         brandService.updateBrand(brandId, request)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "브랜드 삭제 - 브랜드 ID로 삭제를 요청한다"() {
