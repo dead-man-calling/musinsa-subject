@@ -3,6 +3,8 @@ package com.musinsa.subject.service.core;
 import com.musinsa.subject.entity.Brand;
 import com.musinsa.subject.entity.Category;
 import com.musinsa.subject.entity.Product;
+import com.musinsa.subject.exception.DomainException;
+import com.musinsa.subject.exception.DomainExceptionType;
 import com.musinsa.subject.model.product.ProductRequest;
 import com.musinsa.subject.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,12 @@ public class ProductService {
     private final ProductRepository repository;
 
     public Product getProduct(long productId) {
-        return repository.findById(productId).orElseThrow();
+        return repository.findById(productId)
+                .orElseThrow(() ->
+                        DomainException.builder()
+                                .type(DomainExceptionType.PRODUCT_NOT_FOUND)
+                                .build()
+                );
     }
 
     public Product createProduct(long productPrice, Brand brand, Category category) {
@@ -31,7 +38,7 @@ public class ProductService {
     }
 
     public Product updateProduct(long productId, ProductRequest request) {
-        Product product = repository.findById(productId).orElseThrow();
+        Product product = this.getProduct(productId);
 
         product.setProductPrice(request.getProductPrice());
 

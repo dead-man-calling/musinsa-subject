@@ -31,7 +31,7 @@ public class ProductController {
             description = "상품을 생성하는 API"
     )
     @PostMapping
-    public ResponseEntity<Success> createProduct(@Valid ProductRequest request) {
+    public ResponseEntity<Success> createProduct(@Valid @RequestBody ProductRequest request) {
         Long productId = facade.createProduct(request).getProductId();
 
         URI location = URI.create("/products/" + productId);
@@ -55,7 +55,7 @@ public class ProductController {
     )
     @PatchMapping("/{productId}")
     @ResponseStatus(HttpStatus.OK)
-    public Single<ProductResponse> updateProduct(@Positive @PathVariable long productId, @Valid ProductRequest request) {
+    public Single<ProductResponse> updateProduct(@Positive @PathVariable long productId, @Valid @RequestBody ProductRequest request) {
         return new Single<>(facade.updateProduct(productId, request));
     }
 

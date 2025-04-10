@@ -1,6 +1,8 @@
 package com.musinsa.subject.service.core;
 
 import com.musinsa.subject.entity.Category;
+import com.musinsa.subject.exception.DomainException;
+import com.musinsa.subject.exception.DomainExceptionType;
 import com.musinsa.subject.model.category.CategoryRequest;
 import com.musinsa.subject.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +15,21 @@ public class CategoryService {
     private final CategoryRepository repository;
 
     public Category getCategory(long categoryId) {
-        return repository.findById(categoryId).orElseThrow();
+        return repository.findById(categoryId)
+                .orElseThrow(() ->
+                        DomainException.builder()
+                                .type(DomainExceptionType.CATEGORY_NOT_FOUND)
+                                .build()
+                );
     }
 
     public Category getCategoryByCategoryName(String categoryName) {
-        return repository.findFirstByCategoryName(categoryName).orElseThrow();
+        return repository.findFirstByCategoryName(categoryName)
+                .orElseThrow(() ->
+                        DomainException.builder()
+                                .type(DomainExceptionType.CATEGORY_NOT_FOUND)
+                                .build()
+                );
     }
 
     public Category createCategory(CategoryRequest request) {
@@ -25,7 +37,7 @@ public class CategoryService {
     }
 
     public Category updateCategory(long categoryId, CategoryRequest request) {
-        Category category = repository.findById(categoryId).orElseThrow();
+        Category category = this.getCategory(categoryId);
 
         category.setCategoryName(request.getCategoryName());
 

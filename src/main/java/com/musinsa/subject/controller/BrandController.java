@@ -31,7 +31,7 @@ public class BrandController {
             description = "브랜드를 생성하는 API"
     )
     @PostMapping
-    public ResponseEntity<Success> createBrand(@Valid BrandRequest request) {
+    public ResponseEntity<Success> createBrand(@Valid @RequestBody BrandRequest request) {
         Long brandId = facade.createBrand(request).getBrandId();
 
         URI location = URI.create("/brands/" + brandId);
@@ -55,7 +55,7 @@ public class BrandController {
     )
     @PatchMapping("/{brandId}")
     @ResponseStatus(HttpStatus.OK)
-    public Single<BrandResponse> updateBrand(@Positive @PathVariable long brandId, @Valid BrandRequest request) {
+    public Single<BrandResponse> updateBrand(@Positive @PathVariable long brandId, @Valid @RequestBody BrandRequest request) {
         return new Single<>(facade.updateBrand(brandId, request));
     }
 
