@@ -151,7 +151,7 @@ RestControllerAdvice를 이용해 사용자 정의 예외를 핸들링하고 실
 ```
 **JAR 실행**
 ```shell 
- java -jar build/libs/musinsa-subject-0.0.1-SNAPSHOT.jar
+java -jar build/libs/musinsa-subject-0.0.1-SNAPSHOT.jar
 ```
 ### Docker
 **이미지 빌드**
