@@ -1,6 +1,7 @@
 package com.musinsa.subject.service.core
 
 import com.musinsa.subject.entity.Category
+import com.musinsa.subject.exception.DomainException
 import com.musinsa.subject.model.category.CategoryRequest
 import com.musinsa.subject.repository.CategoryRepository
 import spock.lang.Specification
@@ -41,7 +42,7 @@ class CategoryServiceSpec extends Specification {
         categoryService.getCategory(categoryId)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "카테고리 조회 - 존재하는 카테고리 이름으로 조회 시 해당 카테고리를 반환한다"() {
@@ -75,7 +76,7 @@ class CategoryServiceSpec extends Specification {
         categoryService.getCategoryByCategoryName(categoryName)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "카테고리 생성 - 유효한 요청으로 카테고리를 생성한다"() {
@@ -153,7 +154,7 @@ class CategoryServiceSpec extends Specification {
         categoryService.updateCategory(categoryId, request)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "카테고리 삭제 - 카테고리 ID로 삭제를 요청한다"() {

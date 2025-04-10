@@ -3,6 +3,7 @@ package com.musinsa.subject.service.core
 import com.musinsa.subject.entity.Brand
 import com.musinsa.subject.entity.Category
 import com.musinsa.subject.entity.Product
+import com.musinsa.subject.exception.DomainException
 import com.musinsa.subject.model.product.ProductRequest
 import com.musinsa.subject.repository.ProductRepository
 import spock.lang.Specification
@@ -60,7 +61,7 @@ class ProductServiceSpec extends Specification {
         productService.getProduct(productId)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "상품 생성 - 유효한 요청으로 상품을 생성한다"() {
@@ -140,7 +141,7 @@ class ProductServiceSpec extends Specification {
         productService.updateProduct(productId, request)
 
         then:
-        thrown(NoSuchElementException)
+        thrown(DomainException)
     }
 
     def "상품 삭제 - 상품 ID로 삭제을 요청한다"() {
