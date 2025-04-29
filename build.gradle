@@ -1,0 +1,60 @@
+plugins {
+	id "java"
+	id "groovy"
+	id "org.springframework.boot" version "3.4.4"
+	id "io.spring.dependency-management" version "1.1.7"
+}
+
+group = "com.musinsa"
+version = "0.0.1-SNAPSHOT"
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	springDocVersion = "2.8.6"
+	mapstructVersion = "1.6.3"
+	spockVersion = "2.4-M5-groovy-4.0"
+	queryDslVersion = "5.1.0:jakarta"
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "org.springframework.boot:spring-boot-starter-validation"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+
+	runtimeOnly "com.h2database:h2"
+
+	compileOnly "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testImplementation "org.spockframework:spock-core:${spockVersion}"
+	testImplementation "org.spockframework:spock-spring:${spockVersion}"
+
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+tasks.named("test") {
+	useJUnitPlatform()
+}
