@@ -50,7 +50,7 @@ class PriceFacadeSpec extends Specification {
         ]
 
         and:
-        productService.getLowestPriceByCategory() >> products
+        productService.getLowestPriceProductByCategory() >> products
         priceMapper.toResponseCategories(products) >> categoryResponses
 
         when:

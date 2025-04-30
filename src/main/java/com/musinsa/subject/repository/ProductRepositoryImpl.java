@@ -15,7 +15,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     private final JPAQueryFactory factory;
 
-    public List<Product> getLowestPriceByCategory() {
+    public List<Product> getLowestPriceProductByCategory() {
         QProduct product = QProduct.product;
         QProduct subProduct = new QProduct("subProduct");
 
