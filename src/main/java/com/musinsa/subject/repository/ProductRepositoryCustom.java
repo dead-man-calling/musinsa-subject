@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductRepositoryCustom {
 
-    List<Product> getLowestPriceByCategory();
+    List<Product> getLowestPriceProductByCategory();
 
     List<Product> getLowestPriceProductByBrandAndCategory();
 

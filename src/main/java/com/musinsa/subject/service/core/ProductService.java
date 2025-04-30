@@ -49,8 +49,8 @@ public class ProductService {
         repository.deleteById(productId);
     }
 
-    public List<Product> getLowestPriceByCategory() {
-        return repository.getLowestPriceByCategory();
+    public List<Product> getLowestPriceProductByCategory() {
+        return repository.getLowestPriceProductByCategory();
     }
 
     public List<Product> getLowestPriceProductByBrandAndCategory() {

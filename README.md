@@ -92,7 +92,7 @@ classDiagram
     
     class ProductRepositoryCustom {
     <<interface>>
-    +getLowestPriceByCategory() List~Product~
+    +getLowestPriceProductByCategory() List~Product~
     +getLowestPriceProductByBrandAndCategory() List~Product~
     +getMinPriceProductInCategory(long categoryId) List~Product~
     +getMaxPriceProductInCategory(long categoryId) List~Product~
@@ -100,7 +100,7 @@ classDiagram
     
     class ProductRepositoryImpl {
     -JPAQueryFactory factory
-    +getLowestPriceByCategory() List~Product~
+    +getLowestPriceProductByCategory() List~Product~
     +getLowestPriceProductByBrandAndCategory() List~Product~
     +getMinPriceProductInCategory(long categoryId) List~Product~
     +getMaxPriceProductInCategory(long categoryId) List~Product~

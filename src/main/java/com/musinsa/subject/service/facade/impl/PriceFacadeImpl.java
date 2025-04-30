@@ -1,5 +1,6 @@
 package com.musinsa.subject.service.facade.impl;
 
+import com.musinsa.subject.config.CacheName;
 import com.musinsa.subject.entity.Category;
 import com.musinsa.subject.entity.Product;
 import com.musinsa.subject.mapper.PriceMapper;
@@ -10,6 +11,7 @@ import com.musinsa.subject.service.core.CategoryService;
 import com.musinsa.subject.service.core.ProductService;
 import com.musinsa.subject.service.facade.PriceFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +26,9 @@ public class PriceFacadeImpl implements PriceFacade {
     private final ProductService productService;
     private final PriceMapper priceMapper;
 
+    @Cacheable(value = CacheName.LOWEST_PRICE_BY_CATEGORY)
     public LowestPriceByCategoryResponse getLowestPriceByCategory() {
-        List<Product> products = productService.getLowestPriceByCategory();
+        List<Product> products = productService.getLowestPriceProductByCategory();
 
         long totalPrice = products.stream().mapToLong(Product::getProductPrice).sum();
 
@@ -35,6 +38,7 @@ public class PriceFacadeImpl implements PriceFacade {
                 .build();
     }
 
+    @Cacheable(value = CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS)
     public LowestTotalPriceBrandWithCategoryDetailsResponse getLowestTotalPriceBrandWithCategoryDetails() {
         List<Product> products = productService.getLowestPriceProductByBrandAndCategory();
 
@@ -69,6 +73,7 @@ public class PriceFacadeImpl implements PriceFacade {
         );
     }
 
+    @Cacheable(value = CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME, key = "#categoryName")
     public MinMaxPriceBrandsByCategoryNameResponse getMinMaxPriceBrandsByCategoryName(String categoryName) {
         Category category = categoryService.getCategoryByCategoryName(categoryName);
 
