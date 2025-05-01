@@ -128,8 +128,13 @@ classDiagram
     ProductRepositoryImpl --> QProduct : uses
     ProductRepositoryImpl --> JPAQueryFactory : uses
 ```
+### Caffeine
+Caffeine을 이용해 퍼사드 레이어에서 가격 집계 응답을 캐시하고 상품 갱신 시 캐시를 무효화합니다.
+- [CachePolicy](./src/main/java/com/musinsa/subject/config/CachePolicy.java)
+- [PriceFacadeImpl](./src/main/java/com/musinsa/subject/service/facade/impl/PriceFacadeImpl.java)
+- [ProductFacadeImpl](./src/main/java/com/musinsa/subject/service/facade/impl/ProductFacadeImpl.java)
 ### MapStruct
-MapStruct를 이용해 퍼사드 레이어에서 엔티티를 응답 VO로 전환합니다.
+MapStruct를 이용해 퍼사드 레이어에서 엔티티를 VO로 전환합니다.
 - [PriceMapper](./src/main/java/com/musinsa/subject/mapper/PriceMapper.java)
 - [ProductMapper](./src/main/java/com/musinsa/subject/mapper/ProductMapper.java)
 - [BrandMapper](./src/main/java/com/musinsa/subject/mapper/BrandMapper.java)
