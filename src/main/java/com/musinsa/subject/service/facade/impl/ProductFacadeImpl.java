@@ -1,5 +1,6 @@
 package com.musinsa.subject.service.facade.impl;
 
+import com.musinsa.subject.config.CacheName;
 import com.musinsa.subject.entity.Brand;
 import com.musinsa.subject.entity.Category;
 import com.musinsa.subject.entity.Product;
@@ -11,6 +12,7 @@ import com.musinsa.subject.service.core.CategoryService;
 import com.musinsa.subject.service.core.ProductService;
 import com.musinsa.subject.service.facade.ProductFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +24,14 @@ public class ProductFacadeImpl implements ProductFacade {
     private final ProductService productService;
     private final ProductMapper productMapper;
 
+    @CacheEvict(
+            cacheNames = {
+                    CacheName.LOWEST_PRICE_BY_CATEGORY,
+                    CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS,
+                    CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME
+            },
+            allEntries = true
+    )
     public ProductResponse createProduct(ProductRequest request) {
         Brand brand = brandService.getBrand(request.getBrandId());
         Category category = categoryService.getCategory(request.getCategoryId());
@@ -35,10 +45,26 @@ public class ProductFacadeImpl implements ProductFacade {
         return productMapper.toResponseProduct(productService.getProduct(productId));
     }
 
+    @CacheEvict(
+            cacheNames = {
+                    CacheName.LOWEST_PRICE_BY_CATEGORY,
+                    CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS,
+                    CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME
+            },
+            allEntries = true
+    )
     public ProductResponse updateProduct(long productId, ProductRequest request) {
         return productMapper.toResponseProduct(productService.updateProduct(productId, request));
     }
 
+    @CacheEvict(
+            cacheNames = {
+                    CacheName.LOWEST_PRICE_BY_CATEGORY,
+                    CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS,
+                    CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME
+            },
+            allEntries = true
+    )
     public void deleteProduct(long productId) {
         productService.deleteProduct(productId);
     }

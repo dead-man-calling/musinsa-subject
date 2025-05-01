@@ -26,7 +26,7 @@ public class PriceFacadeImpl implements PriceFacade {
     private final ProductService productService;
     private final PriceMapper priceMapper;
 
-    @Cacheable(value = CacheName.LOWEST_PRICE_BY_CATEGORY)
+    @Cacheable(cacheNames = CacheName.LOWEST_PRICE_BY_CATEGORY)
     public LowestPriceByCategoryResponse getLowestPriceByCategory() {
         List<Product> products = productService.getLowestPriceProductByCategory();
 
@@ -38,7 +38,7 @@ public class PriceFacadeImpl implements PriceFacade {
                 .build();
     }
 
-    @Cacheable(value = CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS)
+    @Cacheable(cacheNames = CacheName.LOWEST_TOTAL_PRICE_BRAND_WITH_CATEGORY_DETAILS)
     public LowestTotalPriceBrandWithCategoryDetailsResponse getLowestTotalPriceBrandWithCategoryDetails() {
         List<Product> products = productService.getLowestPriceProductByBrandAndCategory();
 
@@ -73,7 +73,7 @@ public class PriceFacadeImpl implements PriceFacade {
         );
     }
 
-    @Cacheable(value = CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME, key = "#categoryName")
+    @Cacheable(cacheNames = CacheName.MIN_MAX_PRICE_BRANDS_BY_CATEGORY_NAME, key = "#categoryName")
     public MinMaxPriceBrandsByCategoryNameResponse getMinMaxPriceBrandsByCategoryName(String categoryName) {
         Category category = categoryService.getCategoryByCategoryName(categoryName);
 
