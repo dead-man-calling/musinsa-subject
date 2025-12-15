@@ -129,7 +129,7 @@ classDiagram
     ProductRepositoryImpl --> JPAQueryFactory : uses
 ```
 ### Caffeine
-Caffeine을 이용해 퍼사드 레이어에서 가격 집계 응답을 캐시하고 상품 갱신 시 캐시를 무효화합니다.
+Caffeine을 이용해 퍼사드 레이어에서 가격 집계 응답을 캐시하고 상품 갱신 시 캐시를 비웁니다.
 - [CachePolicy](./src/main/java/com/musinsa/subject/config/CachePolicy.java)
 - [PriceFacadeImpl](./src/main/java/com/musinsa/subject/service/facade/impl/PriceFacadeImpl.java)
 - [ProductFacadeImpl](./src/main/java/com/musinsa/subject/service/facade/impl/ProductFacadeImpl.java)

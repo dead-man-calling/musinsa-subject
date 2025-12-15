@@ -9,6 +9,7 @@ import com.musinsa.subject.model.product.ProductRequest;
 import com.musinsa.subject.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class ProductService {
         );
     }
 
+    @Transactional
     public Product updateProduct(long productId, ProductRequest request) {
         Product product = this.getProduct(productId);
 

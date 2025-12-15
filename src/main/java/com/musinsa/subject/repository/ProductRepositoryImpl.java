@@ -20,6 +20,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         QProduct subProduct = new QProduct("subProduct");
 
         return factory.selectFrom(product)
+                .leftJoin(product.brand).fetchJoin()
+                .leftJoin(product.category).fetchJoin()
                 .where(
                         JPAExpressions
                                 .select(subProduct.productPrice.min())
@@ -44,6 +46,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         QProduct subProduct = new QProduct("subProduct");
 
         return factory.selectFrom(product)
+                .leftJoin(product.brand).fetchJoin()
+                .leftJoin(product.category).fetchJoin()
                 .where(
                         JPAExpressions
                                 .select(subProduct.productPrice.min())
@@ -69,6 +73,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         QProduct subProduct = new QProduct("subProduct");
 
         return factory.selectFrom(product)
+                .leftJoin(product.brand).fetchJoin()
+                .leftJoin(product.category).fetchJoin()
                 .where(
                         JPAExpressions
                                 .select(subProduct.productPrice.min())
@@ -84,6 +90,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         QProduct subProduct = new QProduct("subProduct");
 
         return factory.selectFrom(product)
+                .leftJoin(product.brand).fetchJoin()
+                .leftJoin(product.category).fetchJoin()
                 .where(
                         JPAExpressions
                                 .select(subProduct.productPrice.max())
