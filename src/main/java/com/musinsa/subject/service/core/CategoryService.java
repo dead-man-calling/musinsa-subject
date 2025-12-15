@@ -7,6 +7,7 @@ import com.musinsa.subject.model.category.CategoryRequest;
 import com.musinsa.subject.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,7 @@ public class CategoryService {
         return repository.save(Category.builder().categoryName(request.getCategoryName()).build());
     }
 
+    @Transactional
     public Category updateCategory(long categoryId, CategoryRequest request) {
         Category category = this.getCategory(categoryId);
 

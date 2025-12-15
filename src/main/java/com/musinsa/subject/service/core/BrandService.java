@@ -7,6 +7,7 @@ import com.musinsa.subject.model.brand.BrandRequest;
 import com.musinsa.subject.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class BrandService {
         return repository.save(Brand.builder().brandName(request.getBrandName()).build());
     }
 
+    @Transactional
     public Brand updateBrand(long brandId, BrandRequest request) {
         Brand brand = this.getBrand(brandId);
 
